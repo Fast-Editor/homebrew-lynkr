@@ -25,11 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # setup-homebrew taps this checkout automatically as fast-editor/lynkr,
+      # so the formula below resolves to the code in this commit/PR.
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
-
-      - name: Tap from this checkout
-        run: brew tap fast-editor/lynkr "$GITHUB_WORKSPACE"
 
       - name: Audit formula (style/online — non-fatal)
         run: brew audit --formula --online fast-editor/lynkr/lynkr || true

@@ -1,0 +1,47 @@
+name: Tests
+
+# Safety net for the formula — proves `brew install lynkr` + `brew test` still
+# work. Runs on every push to main (this is what guards the automated version
+# bumps, which commit directly to main), on PRs, and on demand.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Formula/**"
+      - ".github/workflows/tests.yml"
+  pull_request:
+    paths:
+      - "Formula/**"
+      - ".github/workflows/tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  install-and-test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Tap from this checkout
+        run: brew tap fast-editor/lynkr "$GITHUB_WORKSPACE"
+
+      - name: Audit formula (style/online — non-fatal)
+        run: brew audit --formula --online fast-editor/lynkr/lynkr || true
+
+      - name: brew install
+        run: brew install --formula --verbose fast-editor/lynkr/lynkr
+
+      - name: brew test
+        run: brew test --verbose fast-editor/lynkr/lynkr
+
+      - name: Smoke check the linked CLI is on PATH
+        run: |
+          V="$(lynkr --version)"
+          echo "$V" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+' || { echo "unexpected version output: $V" >&2; exit 1; }
+          echo "lynkr $V installed and runnable"

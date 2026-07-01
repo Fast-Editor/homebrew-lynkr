@@ -1,8 +1,8 @@
 class Lynkr < Formula
   desc "Self-hosted LLM gateway and tier-routing proxy for AI coding tools"
   homepage "https://github.com/Fast-Editor/Lynkr"
-  url "https://registry.npmjs.org/lynkr/-/lynkr-9.6.0.tgz"
-  sha256 "baa6b4a13d33ca97acbfd330c50ba649769cddc4888c8be55c84dc36cfcee360"
+  url "https://registry.npmjs.org/lynkr/-/lynkr-9.7.2.tgz"
+  sha256 "1f7062b6c4589c6f1c66a274a402633020a751a3884b226bd1a14c700b50bfd1"
   license "Apache-2.0"
 
   livecheck do

@@ -19,8 +19,13 @@ cask "caret" do
 
   app "Caret.app"
 
-  # Builds are ad-hoc signed until a Developer ID is configured. Homebrew 7 no longer applies the quarantine
-  # attribute to cask downloads, so the app opens without Gatekeeper's "damaged" dialog.
+  # Builds are ad-hoc signed until a Developer ID is configured. Homebrew quarantines cask downloads, and a quarantined
+  # ad-hoc app is refused by Gatekeeper as "damaged", so clear the attribute after moving the app into place.
+  # (Legacy `postflight` block: Homebrew 7's `postflight_steps` DSL has no verb for running a command yet.)
+  postflight do
+    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{appdir}/Caret.app"], sudo: false
+  end
+
   zap trash: [
     "~/.caret",
     "~/Library/Caches/dev.caret.editor",

@@ -15,16 +15,12 @@ cask "caret" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :monterey"
+  depends_on macos: :monterey
 
   app "Caret.app"
 
-  # Builds are ad-hoc signed until a Developer ID is configured; install with `--no-quarantine` to skip Gatekeeper's
-  # "damaged" dialog, or run `xattr -dr com.apple.quarantine /Applications/Caret.app` afterwards.
-  postflight do
-    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{appdir}/Caret.app"], sudo: false
-  end
-
+  # Builds are ad-hoc signed until a Developer ID is configured. Homebrew 7 no longer applies the quarantine
+  # attribute to cask downloads, so the app opens without Gatekeeper's "damaged" dialog.
   zap trash: [
     "~/.caret",
     "~/Library/Caches/dev.caret.editor",

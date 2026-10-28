@@ -25,5 +25,5 @@ The Caret editor ships as a cask in this tap:
 
 ```bash
 brew tap fast-editor/lynkr
-brew install --cask --no-quarantine caret   # --no-quarantine skips Gatekeeper's "damaged" dialog for the ad-hoc signed app
+brew install --cask caret
 ```

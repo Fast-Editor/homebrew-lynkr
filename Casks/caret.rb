@@ -1,9 +1,9 @@
 cask "caret" do
   arch arm: "aarch64", intel: "x64"
 
-  version "0.1.0"
-  sha256 arm:   "fe79cbac6fe22382f324f867ad7310a172089eb5279698b5f5e71e30d85e451f",
-         intel: "972cbc6d42adcbf8b25f49e55ce805435ecd33153e3cd925363ee9ea06836339"
+  version "0.2.0"
+  sha256 arm:   "7e7d7ee45103a02fac789d49c1a6180c05488b8d7e1b4967d49c61b34c4fc960",
+         intel: "9e557380db2c877892f47df6917aa6a508756760424e11108c05aa4b965a8945"
 
   url "https://github.com/Fast-Editor/Caret/releases/download/v#{version}/Caret_#{version}_#{arch}.dmg"
   name "Caret"

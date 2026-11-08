@@ -15,6 +15,9 @@ cask "caret" do
     strategy :github_latest
   end
 
+  # Caret has its own tap now: `brew tap fast-editor/caret && brew install --cask caret`.
+  deprecate! date: "2026-11-08", because: "it moved to the fast-editor/caret tap", replacement_cask: "fast-editor/caret/caret"
+
   depends_on macos: :monterey
 
   app "Caret.app"

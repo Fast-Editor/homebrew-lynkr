@@ -27,3 +27,8 @@ The Caret editor ships as a cask in this tap:
 brew tap fast-editor/lynkr
 brew install --cask caret
 ```
+
+## Caret
+
+The Caret cask moved to its own tap: `brew tap fast-editor/caret && brew trust fast-editor/caret && brew install --cask caret`.
+If you installed Caret from this tap, run `brew uninstall --cask caret` once and install it from `fast-editor/caret`.
